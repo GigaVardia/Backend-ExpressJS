@@ -2,7 +2,7 @@ const express = require('express');
 const userCtrl = require('../controllers/user.controller');
 const authCtrl = require('../controllers/auth.controller');
 
-const router = express.router();
+const router = express.Router();
 
 router.route('/api/users')
     .get(userCtrl.list)

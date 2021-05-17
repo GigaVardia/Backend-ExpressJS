@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 require('dotenv').config();
 
-const singin = async (req, res) => {
+const signin = async (req, res) => {
     try {
         let user = await User.findOne({"email": req.body.email});
         if (!user) {
@@ -16,7 +16,7 @@ const singin = async (req, res) => {
             });
         }
 
-        const token = jwt.sing({_id: user._id}, process.env.JWT_SECRET);
+        const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET);
 
         res.cookie('t', token, {expire: new Date() + 9999});
 
@@ -33,7 +33,7 @@ const singin = async (req, res) => {
     }
 };
 
-const singout = (req, res) => {
+const signout = (req, res) => {
     res.clearCookie('t');
     return res.json({
         message: "Signed out!"
@@ -42,7 +42,8 @@ const singout = (req, res) => {
 
 const requireSignin = expressJwt({
     secret: process.env.JWT_SECRET,
-    userProperty: 'auth'
+    userProperty: 'auth',
+    algorithms: ['HS256']
 });
 
 const hasAuthorization = (req, res, next) => {
@@ -56,8 +57,8 @@ const hasAuthorization = (req, res, next) => {
 };
 
 module.exports = {
-    singin,
-    singout,
+    signin,
+    signout,
     requireSignin,
     hasAuthorization
 }

@@ -36,4 +36,4 @@ const getErrorMessage = err => {
 };
 
 
-export default {getErrorMessage};
+module.exports = getErrorMessage;
