@@ -13,7 +13,7 @@ const getUniqueErrorMessage = err => {
     return output;
 }
 
-const getErrorMessage = err => {
+const getErrorMessage = (err) => {
     let message = '';
     if (err.code) {
         switch (err.code) {
@@ -36,4 +36,6 @@ const getErrorMessage = err => {
 };
 
 
-module.exports = getErrorMessage;
+module.exports = {
+    getErrorMessage
+};
