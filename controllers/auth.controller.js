@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const signin = async (req, res) => {
     try {
+        console.log("Here")
         let user = await User.findOne({"email": req.body.email});
         if (!user) {
             return res.status(401).json({error: "User not found!"});
